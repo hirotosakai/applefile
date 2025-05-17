@@ -1,0 +1,25 @@
+This is a library for dealing with Apple Macintosh files on Unix systems.
+
+There are four different layers currently implemented.
+
+At the lowest level are ff-macbinary.c, ff-applesingledouble.c and
+ff-hexbin.c.  These give interfaces to the common formats used for
+storing Macintosh files on non-Macintosh computers - MacBinary,
+MacBinary II, MacBinary III, Apple Single Apple Double, and HexBin.
+
+'Beside' that level is the resource.c level.  Given a memory buffer that
+contains a Macintosh resource file, it allows retreiving resource data
+by (type,id) pairs.  No interpretation of the data is done.
+
+Above both of those is the applefile.[ch] level.  This gives a unified
+(but currently less-featureful) interface to MacBinary, AppleSingle and
+AppleDouble files, handles finding the resource file inside the file,
+and exports the af_res and af_data functions.
+
+On top of all of that are resource-type specific interfaces; currently
+the only one is xpm_data(), which return the XPM-format data
+corresponding to an icon with a given ID.  (This has actually been
+moved to the sample-apps directory; I'm undecided how things like this
+should be handled)
+
+libapplefile is licensed under the GPL.  See COPYING for more information.

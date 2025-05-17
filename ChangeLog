@@ -1,0 +1,69 @@
+2000-03-05  Todd Larason  <jtl@molehill.org>
+
+	* configure.in: updated VERSION to 0.3
+
+	* Makefile.am (libapplefile_la_LDFLAGS): updated CURRENT to 1
+
+	* sample-apps/dumpall.c: changes to write direct pixmaps as PNG
+	files, to support the 32bit icon types
+
+	* rt-ppat.c (af_ppat_to_indexed_pixmap): don't try to process
+	32-bit ppats (I didn't know there were such a thing!  none of the
+	documentation I've found mentions them.  need to investigate this)
+
+	* rt-icons.c (get_icns): new function for parsing an icns resource 
+	and returning a table of pointers to the subresources
+	(icns_make_indexed): new function for building an
+	af_indexed_pixmap_t from a pre-parsed icns
+	(icns_decompress): new function for decompressing an icns 32bit plane
+	(icns_make_direct): new function for building an
+	af_direct_pixmap_t from a pre-parsed icns
+	(get_indexed_icns): old implementation split into get_icns and
+	icns_make_indexed; converted to use those
+	(get_direct_icns): new function for getting a direct pixmap from
+	an icns, or getting an indexed one and converting, as necessary
+	(af_get_direct_icon): first implementation
+
+	* af-graphics.h: af_get_direct_icon doesn't have a colors
+	argument, but does have a mode argument indicating which
+	(sub)resources to use to satisfy the request
+
+2000-03-02  Todd Larason  <jtl@molehill.org>
+
+	* sample-apps/dumpall.c (save_indexed_pmap): support 'type's
+	longer than 4 characters (for icns + subtype)
+	(dump_icns): initial implementation; dumps all the indexed icns
+	subtypes, but not yet the 32 bit formats
+	(dumptype): pass a NUL-terminated version of the type string to
+	the dump functions, to more easily allow string manipulation there 
+	if wanted
+
+	* rt-ppat.c (af_ppat_to_indexed_pixmap): use af_int_map_indexed()
+
+	* rt-icons.c (trad_indexed): use af_int_map_indexed()
+	(get_indexed_icns): initial implementation - handles all the
+	indexed palette parts of the icns
+	(ICON_indexed): initial implementation
+	(af_get_indexed_icon): if try_icns == 2, *only* try icns; mainly
+	for debugging/sample app usage - nearly all real uses should use
+	try_icns == 1
+	(struct depths): simplified struct, removing items no longer
+	needed here with move to af_int_map_indexed()
+
+	* rt-cicn.c (af_cicn_to_indexed_pixmap): use af_int_pmap_indexed()
+
+	* graphics.c (af_int_pmap_indexed): new function, combined
+	generalization of several old ones
+
+	* af-graphics.h: af_get_indexed_icon's try_icns parm is now a
+	tristate, documented in a comment;  new internal-only function
+	af_int_pmap_indexed for the common code for converting from
+	apples' 3 gazillion slightly-different pmap formats to the
+	canonical indexed pixmap format
+
+2000-03-01  Todd Larason  <jtl@molehill.org>
+
+	* af-graphics.h: add af_get_indexed_icon() and af_get_direct_icon()
+
+	* Makefile.am (libapplefile_la_SOURCES): add rt-icons.c
+
