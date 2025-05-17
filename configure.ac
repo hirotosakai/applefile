@@ -1,21 +1,20 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(applefile.c)
-AM_INIT_AUTOMAKE(applefile, 0.3)
+AC_INIT([applefile], [0.3.1])
+AM_INIT_AUTOMAKE
 
 dnl checks for programs
-AM_PROG_LIBTOOL
+LT_INIT
 AC_PROG_MAKE_SET
 AC_PROG_CC
 
 dnl checks for libraries
 dnl checks for header files
-AC_STDC_HEADERS
-
 dnl checks for typedefs
 dnl checks for structures
 dnl checks for compiler characteristics
 dnl checks for library functions
 dnl checks for system services
 
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT()

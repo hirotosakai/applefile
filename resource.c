@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "applefile_int.h"
 #include "resource.h"

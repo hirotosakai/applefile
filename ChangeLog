@@ -1,3 +1,11 @@
+2025-05-17  Hiroto Sakai
+	* configure.ac: modernize configure.in to avoid autoconf error
+	* AUTHORS, INSTALL, NEWS: add to avoid automake error
+	* graphics.c: add #inclde <string.h>
+	* resource.c: add #inclde <string.h>
+	* rt-cicn.c: add #inclde <string.h>
+	* rt-ppat.c: add #inclde <string.h>
+
 2000-03-05  Todd Larason  <jtl@molehill.org>
 
 	* configure.in: updated VERSION to 0.3
