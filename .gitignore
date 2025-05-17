@@ -1,5 +1,8 @@
 *.exe
 *.o
+*.la
+*.lai
+*.lo
 *~
 .DS_Store
 aclocal.m4
@@ -15,6 +18,7 @@ config.sub
 configure
 depcomp
 install-sh
+libtool
 ltconfig
 ltmain.sh
 Makefile
@@ -22,4 +26,6 @@ Makefile.in
 missing
 mkinstalldirs
 .deps/
+.libs/
 stamp-h1
+make_crc_table
